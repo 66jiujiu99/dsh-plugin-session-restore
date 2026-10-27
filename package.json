@@ -1,0 +1,41 @@
+{
+  "name": "dsh-plugin-session-restore",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "会话恢复：从 DSH 会话记录里重建工作区文件。每条会话都是一份完整的编辑日志——write 存全文，edit 存前后片段——所以文件被误删或改坏时，可以按时间顺序回放，把当时的代码原样找回来。Recover workspace files from DSH session logs.",
+  "exports": {
+    ".": "./index.js",
+    "./client": "./client.js",
+    "./locale/*.json": "./locale/*.json",
+    "./icon": "./icon.svg"
+  },
+  "files": [
+    "index.js",
+    "client.js",
+    "cordis.patch.yml",
+    "lib/*.js",
+    "locale/*.json",
+    "icon.svg",
+    "README.md"
+  ],
+  "engines": {
+    "node": ">=20"
+  },
+  "dsh": {
+    "bundle": {
+      "patch": "./cordis.patch.yml"
+    },
+    "client": {
+      "platform": "web",
+      "immediately": true,
+      "inject": [
+        "@deepseek-ai/dsh-client-locale",
+        "@deepseek-ai/dsh-client-ui-settings"
+      ]
+    }
+  },
+  "scripts": {
+    "test": "node tools/run-all.mjs"
+  }
+}
